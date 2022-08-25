@@ -1,0 +1,12 @@
+@import "../utility/utility.scss";
+
+.hymnal-page-container {
+    margin: 0 3%;
+}
+
+.hymnals {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}

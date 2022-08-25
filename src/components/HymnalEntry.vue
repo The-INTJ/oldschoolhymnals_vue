@@ -29,7 +29,7 @@ export default Vue.extend({
   },
   computed: {
     selectedColor() {
-        return this.selected ? "selected" : "unselected"
+        return this.selected ? "selected" : "unselected";
     }
   }
 });
