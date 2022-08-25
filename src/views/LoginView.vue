@@ -1,0 +1,43 @@
+<template>
+  <div class="main-content">
+    <div class="inputs">
+      <input type="text" v-model="email" />
+      <input type="password" v-model="password"/>
+    </div>
+    <div class="buttons">
+      <button @click="signIn">Login</button>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from "vue";
+import { signInWithEmailAndPassword } from "@firebase/auth";
+import { auth } from "@/lib/firebase";
+
+export default Vue.extend({
+  name: "LoginView",
+  components: {},
+  data() {
+    return {
+      email: '',
+      password: ''
+    };
+  },
+  methods: {
+    async signIn() {
+      let response = await signInWithEmailAndPassword(auth, this.email, this.password);
+      console.log(response)
+      if(response) {
+        this.$router.replace("hymnals")
+      } else {
+        alert("fail")
+      }
+    }
+  }
+});
+</script>
+
+<style lang="scss" scoped>
+@import "../assets/styles/views/LoginView.scss";
+</style>

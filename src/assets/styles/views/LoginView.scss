@@ -1,6 +1,6 @@
 @import "../utility/utility.scss";
 
-.mainContent {
+.main-content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,7 +28,7 @@
         }
     }
 }
-.buttonsContainer {
+.buttons {
     padding-top: 20px;
     width: 30%;
     display: flex;

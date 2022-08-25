@@ -2,6 +2,12 @@ $mobileBreakpoint: 600px;
 $tabletBreakpoint: 1000px;
 $desktopBreakpoint: 1280px;
 
+:root {
+    --mobileBreakpoint: #{$mobileBreakpoint};
+    --tabletBreakpoint: #{$tabletBreakpoint};
+    --desktopBreakpoint: #{$desktopBreakpoint};
+}
+
 :export {
     mobileBreakpoint: $mobileBreakpoint;
     tabletBreakpoint: $tabletBreakpoint;

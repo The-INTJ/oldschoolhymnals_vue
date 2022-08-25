@@ -47,9 +47,5 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-
-.hymnals {
-    display: flex;
-    flex-direction: row;
-}
+@import "@/assets/styles/views/HymnalListView.scss";
 </style>
