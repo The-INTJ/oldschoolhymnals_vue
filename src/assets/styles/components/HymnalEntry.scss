@@ -1,0 +1,37 @@
+@import "../utility/utility.scss";
+
+.hymnal-container {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  padding: 15px;
+  max-width: fit-content;
+  border-radius: 25px;
+  margin: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 350px;
+  min-height: 460px;
+  &:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+}
+.image-container {
+  max-height: 400px;
+  max-width: 200px;
+  position: relative;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.description {
+  border-top: 1px solid $silver-lettering;
+  margin-top: 20px;
+  width: 100%;
+}
