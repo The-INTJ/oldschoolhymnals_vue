@@ -10,14 +10,6 @@ const routes: Array<RouteConfig> = [
     name: 'home',
     component: HomeView
   },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  },
  {
     path: '/hymnals',
     name: 'hymnals',
@@ -33,7 +25,15 @@ const routes: Array<RouteConfig> = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/LoginView.vue')
-  }
+  },
+  {
+    path: '/account',
+    name: 'account',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/AccountView.vue')
+  },
 ]
 
 const router = new VueRouter({

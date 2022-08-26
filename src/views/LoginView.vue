@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content">
+  <div class="main-content page-container">
     <div class="inputs">
       <input type="text" v-model="email" />
       <input type="password" v-model="password"/>
@@ -30,6 +30,7 @@ export default Vue.extend({
       console.log(response)
       if(response) {
         this.$router.replace("hymnals")
+        this.$store.state.currentUser = true
       } else {
         alert("fail")
       }

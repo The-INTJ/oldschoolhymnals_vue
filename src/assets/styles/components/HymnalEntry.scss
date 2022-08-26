@@ -2,20 +2,26 @@
 
 .hymnal-container {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border: 3px solid transparent; // prevents selection state from adding position
   transition: 0.3s;
   padding: 15px;
   max-width: fit-content;
-  border-radius: 25px;
+  border-radius: $border-radius-larger;
   margin: 25px;
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   min-width: 350px;
   min-height: 460px;
+
   &:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     cursor: pointer;
+  }
+  &.selected {
+    border: 3px solid $selectedGreen;
   }
 }
 .image-container {

@@ -6,9 +6,9 @@
       <hr />
     </div>
     <div :class="'nav-container ' + clickedOnMobile">
-      <router-link to="/about">About</router-link>
       <router-link to="/hymnals">Hymnals</router-link>
-      <router-link to="/login">Login</router-link>
+      <router-link v-if="!loggedIn" to="/login">Login</router-link>
+      <router-link v-else to="/account">Account</router-link>
     </div>
   </div>
 </template>
@@ -28,6 +28,9 @@ export default Vue.extend({
   computed: {
     clickedOnMobile() {
       return this.navClicked ? "link-visible" : "link-invisible";
+    },
+    loggedIn() {
+      return this.$store.state.currentUser;
     }
   },
   methods: {

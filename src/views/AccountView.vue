@@ -1,7 +1,7 @@
 <template>
-  <div class="hymnal page-container">
-    <h1>Hymnals</h1>
-    <div class="hymnals">
+  <div class="page-container account">
+    <h1>Account</h1>
+    <div class="purchased-hymnals">
       <hymnal-entry
         v-for="(hymnal, index) in hymnals"
         :title="hymnal.title"
@@ -19,7 +19,7 @@ import Vue from "vue";
 import HymnalEntry from "@/components/HymnalEntry.vue"; // @ is an alias to /src
 
 export default Vue.extend({
-  name: "HymnalListView",
+  name: "AccountView",
   components: {
     HymnalEntry,
   },

@@ -1,5 +1,5 @@
 <template>
-  <div :class="selectedColor + ' hymnal-container'">
+  <div :class="selectedColor + ' hymnal-container'" @click="changeSelected">
     <div class="image-container">
       <img :src="require('@/assets/' + image + '')" :alt="altText" />
     </div>
@@ -25,17 +25,27 @@ export default Vue.extend({
       default: "",
     },
     altText: String,
-    selected: Boolean
+    bookInCart: Boolean
+  },
+  data() {
+    return {
+      selected: false
+    };
   },
   computed: {
     selectedColor() {
-        return this.selected ? "selected" : "unselected";
-    }
-  }
+      return this.selected | this.bookInCart ? "selected" : "unselected";
+    },
+  },
+  methods: {
+    changeSelected() {
+      this.selected = !this.selected;
+    },
+  },
 });
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-  @import "../assets/styles/components/HymnalEntry.scss";
+@import "../assets/styles/components/HymnalEntry.scss";
 </style>

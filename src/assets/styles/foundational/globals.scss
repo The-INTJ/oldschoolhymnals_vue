@@ -6,38 +6,20 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  
 }
 
-main {
-  padding: 50px;
+.page-container {
+  margin: 3%;
 }
 
 a {
-  color: inherit;
+  color: $silver-lettering;
   text-decoration: none;
+  font-family: $default-font;
+  font-weight: $font-weight-bold;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-.center {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.main-div {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  padding-top: 50px;
-}
-
-/* CSS */
-.default-button {
+button {
   @include default-button-styles();
 }
