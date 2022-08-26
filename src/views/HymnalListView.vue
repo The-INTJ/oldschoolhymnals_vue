@@ -8,7 +8,6 @@
         :description="hymnal.description"
         :image="hymnal.image"
         :key="index"
-        :bookInCart="true"
       />
     </div>
   </div>

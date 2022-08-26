@@ -29,10 +29,10 @@ export default Vue.extend({
       let response = await signInWithEmailAndPassword(auth, this.email, this.password);
       console.log(response)
       if(response) {
-        this.$router.replace("hymnals")
-        this.$store.state.currentUser = true
+        //this.$router.replace("hymnals")
+        this.$store.state.currentUser = response.user;
       } else {
-        alert("fail")
+        alert("Login did not succeed. That was Fred's password, try yours.")
       }
     }
   }

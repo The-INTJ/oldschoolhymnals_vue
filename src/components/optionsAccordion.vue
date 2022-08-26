@@ -30,7 +30,7 @@ export default Vue.extend({
       return this.navClicked ? "link-visible" : "link-invisible";
     },
     loggedIn() {
-      return this.$store.state.currentUser;
+      return this.$store.state.currentUser != null;
     }
   },
   methods: {
