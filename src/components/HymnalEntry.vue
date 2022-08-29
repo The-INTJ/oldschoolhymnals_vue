@@ -1,5 +1,5 @@
 <template>
-  <div :class="selectedColor + ' hymnal-container'" @click="changeSelected">
+  <div :class="compactViewClass + ' ' + selectedColorClass + ' hymnal-container'" @click="changeSelected">
     <div class="image-container">
       <img :src="require('@/assets/' + image + '')" :alt="altText" />
     </div>
@@ -25,7 +25,8 @@ export default Vue.extend({
       default: "",
     },
     altText: String,
-    bookInCart: Boolean
+    bookInCart: Boolean,
+    compactView: Boolean
   },
   data() {
     return {
@@ -33,9 +34,12 @@ export default Vue.extend({
     };
   },
   computed: {
-    selectedColor() {
+    selectedColorClass() {
       return this.selected | this.bookInCart ? "selected" : "unselected";
     },
+    compactViewClass() {
+      return this.compactView ? "compact" : "";
+    }
   },
   methods: {
     changeSelected() {

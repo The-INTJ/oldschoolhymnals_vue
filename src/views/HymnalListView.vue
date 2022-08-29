@@ -1,6 +1,8 @@
 <template>
   <div class="hymnal page-container">
     <h1>Hymnals</h1>
+    <button v-if="compactView" class="view-button" @click="changeViewStyle">Show Hymnal Image</button>
+    <button v-else class="view-button" @click="changeViewStyle">Hide Hymnal Image</button>
     <div class="hymnals">
       <hymnal-entry
         v-for="(hymnal, index) in hymnals"
@@ -8,6 +10,7 @@
         :description="hymnal.description"
         :image="hymnal.image"
         :key="index"
+        :compactView="compactView"
       />
     </div>
   </div>
@@ -41,8 +44,17 @@ export default Vue.extend({
           image: "soz.jpg",
         },
       ],
+      compactView: {
+        type: Boolean,
+        default: false
+      }
     };
   },
+  methods: {
+    changeViewStyle() {
+      this.compactView = !this.compactView;
+    }
+  }
 });
 </script>
 
