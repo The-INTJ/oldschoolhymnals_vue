@@ -41,3 +41,19 @@
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
 }
+
+@mixin default-input-styles() {
+  height: 30px;
+  border-radius: $border-radius-default;
+  border: 1px solid $silver-lettering;
+
+  &:hover {
+    @include card-shadow();
+  }
+
+  &:focus,
+  &:focus-within {
+    @include card-shadow();
+    outline: 1px solid $hymnal-red;
+  }
+}

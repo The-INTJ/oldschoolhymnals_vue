@@ -31,16 +31,18 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 0 15px 15px;
 
     width: 100vw;
     border-radius: 5px;
     background-color: $hymnal-red;
 
+    padding-bottom: 10px;
+
     a {
-      padding: 15px 0;
+      margin: 15px $header-margins 5px;
       border-bottom: 3px solid $silver-lettering;
-      width: 100%;
+      width: calc(100% - #{$header-margins} * 2);
+      align-self: baseline;
     }
   }
 }
@@ -58,15 +60,16 @@
 
 .mobile-hr-container {
   display: none;
+
   @include layout-for(mobile) {
-    display: block;
+    display: flex;
   }
 
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
 
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border: 3px solid $silver-lettering;
   border-radius: 5px;
   padding: 0 5px;
@@ -76,9 +79,9 @@
     color: $silver-lettering;
     background-color: $silver-lettering;
     border: 1px solid $silver-lettering;
-    height: 2px;
+    min-height: 2px;
     border-radius: $border-radius-default;
-    margin: 16% 0;
+    margin: 0;
   }
 
   .mobile-links-close {

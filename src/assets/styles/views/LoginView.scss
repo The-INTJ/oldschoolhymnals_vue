@@ -7,25 +7,10 @@
 }
 .inputs {
     display: flex;
-    justify-content: space-evenly;
-    @include layout-for($mobileBreakpoint) {
-        width: 100%;
-    }
-    @include layout-for($tabletBreakpoint) {
-        width: 70%;
-    }
-    @include layout-for($desktopBreakpoint) {
-        width: 50%;
-    }
+    justify-content: center;
+    flex-wrap: wrap;
     input {
-        border: 0;
-        border-bottom: 1px solid $silver-lettering;
-        border-radius: 8px;
-        padding: 5px;
-        &:focus,
-        &:active {
-            @include box-shadow-hoverstate();
-        }
+        margin: 10px;
     }
 }
 .buttons {
