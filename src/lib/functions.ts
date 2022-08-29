@@ -1,4 +1,12 @@
-import { auth, firestore } from './firebase';
-import { doc, collection } from 'firebase/firestore';
+import { getDocs, collection } from 'firebase/firestore';
+import { firestore } from './firebase';
 
-// Custom hook to read  auth record and user profile doc
+export async function getHymnals() {
+    const querySnapshot = await getDocs(collection(firestore, "hymnals"));
+    const hymnalArray: any = [];
+    querySnapshot.forEach(hymnal => {
+        console.log(`${hymnal.id} => ${hymnal.data().Title}`)
+        hymnalArray.push(hymnal);
+    });
+    return hymnalArray;
+}

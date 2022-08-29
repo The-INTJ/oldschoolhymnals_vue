@@ -1,5 +1,6 @@
-export type Hymnal = {
+export type HymnalType = {
     title: string,
-    description: string,
-    image: string
+    image?: string,
+    selected?: boolean,
+
 }
