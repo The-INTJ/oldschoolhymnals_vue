@@ -1,6 +1,9 @@
 <template>
   <div class="hymnal page-container">
+    <div class="title-cart-container">
     <h1>Hymnals</h1>
+    <button class="cart-button">Cart ({{computeItemsInCart}})</button>
+    </div>
     <button v-if="compactView" class="view-button" @click="changeViewStyle">Show Hymnal Image</button>
     <button v-else class="view-button" @click="changeViewStyle">Hide Hymnal Image</button>
     <div class="hymnals">
@@ -11,6 +14,7 @@
         :image="hymnal.image"
         :key="index"
         :compactView="compactView"
+        @onHymnalClicked="onHymnalClicked($event, index)"
       />
     </div>
   </div>
@@ -32,27 +36,42 @@ export default Vue.extend({
           title: "The Centennial",
           description: "The old and new in a confounding order",
           image: "centennial.png",
+          selected: false
         },
         {
           title: "Old School Hymnal (12th Edition)",
           description: "The old and the gold",
           image: "osh12.jpg",
+          selected: false
         },
         {
           title: "Songs of Zion",
           description: "With songs ever the bravest leaders shake to lead",
           image: "soz.jpg",
+          selected: false
         },
       ],
-      compactView: {
-        type: Boolean,
-        default: false
-      }
+      compactView: false
     };
   },
   methods: {
     changeViewStyle() {
-      this.compactView = !this.compactView;
+      console.log(this.compactView)
+      this.compactView = !(this.compactView);
+    },
+    onHymnalClicked($event, index) {
+      this.hymnals[index].selected = $event;
+    }
+  },
+  computed: {
+    computeItemsInCart() {
+      let currentItems = 0;
+      this.hymnals.forEach(hymnal => {
+        if(hymnal.selected) {
+          currentItems = currentItems + 1;
+        }
+      })
+      return currentItems;
     }
   }
 });

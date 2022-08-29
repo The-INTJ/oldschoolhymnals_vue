@@ -1,5 +1,32 @@
 @import "../utility/utility.scss";
 
+.title-cart-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cart-button {
+    background-color: unset;
+    color: $black;
+    font-size: $font-size-large;
+    display: flex;
+    align-items: center;
+
+    &::after {
+        content: "";
+        min-height: 25px;
+        min-width: 25px;
+        mask-repeat: no-repeat;
+        mask-size: contain;
+        mask-position: center;
+        mask-image: url("/public/img/icons/shopping-cart.svg");
+        background-color: $black;
+        margin-left: 10px;
+    }
+}
+
 .hymnals {
     display: flex;
     flex-direction: row;

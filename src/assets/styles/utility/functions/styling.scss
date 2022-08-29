@@ -13,6 +13,7 @@
 }
 
 @mixin default-button-styles() {
+  height: fit-content;
   background-color: $hymnal-red;
   border-radius: $border-radius-default;
   border-width: 0;

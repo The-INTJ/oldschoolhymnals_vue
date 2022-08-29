@@ -44,6 +44,7 @@ export default Vue.extend({
   methods: {
     changeSelected() {
       this.selected = !this.selected;
+      this.$emit('onHymnalClicked', this.selected);
     },
   },
 });
