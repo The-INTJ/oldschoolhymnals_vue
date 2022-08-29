@@ -4,8 +4,8 @@
     <h1>Hymnals</h1>
     <button class="cart-button">Cart ({{computeItemsInCart}})</button>
     </div>
-    <button v-if="compactView" class="view-button" @click="changeViewStyle">Show Hymnal Image</button>
-    <button v-else class="view-button" @click="changeViewStyle">Hide Hymnal Image</button>
+    <button v-if="compactView" class="view-button" @click="changeViewStyle">Enlarge Hymnal Image</button>
+    <button v-else class="view-button" @click="changeViewStyle">Shrink Hymnal Image</button>
     <div class="hymnals">
       <hymnal-entry
         v-for="(hymnal, index) in hymnals"
@@ -15,6 +15,7 @@
         :key="index"
         :compactView="compactView"
         @onHymnalClicked="onHymnalClicked($event, index)"
+        tabindex="0"
       />
     </div>
   </div>
@@ -51,7 +52,7 @@ export default Vue.extend({
           selected: false
         },
       ],
-      compactView: false
+      compactView: true 
     };
   },
   methods: {

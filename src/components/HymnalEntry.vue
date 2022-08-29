@@ -7,7 +7,6 @@
       <h4>
         <b>{{ title }}</b>
       </h4>
-      <p>{{ description }}</p>
     </div>
   </div>
 </template>
