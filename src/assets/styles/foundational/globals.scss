@@ -17,6 +17,15 @@ body {
   margin: 3%;
 }
 
+.page-overlay {
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: $grey_transluscent;
+}
+
 a {
   color: $silver-lettering;
   text-decoration: none;

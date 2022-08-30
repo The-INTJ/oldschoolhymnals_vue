@@ -2,7 +2,7 @@
   <div class="hymnal page-container">
     <div class="title-cart-container">
       <h1>Hymnals</h1>
-      <button class="cart-button" @click="openConfirmModal">
+      <button class="cart-button" @click="changeCartState">
         Cart ({{ computeItemsInCart }})
       </button>
     </div>
@@ -12,9 +12,17 @@
     <button v-else class="view-button" @click="changeViewStyle">
       Shrink Hymnal Image
     </button>
+    <div class="purchase-container" v-if="cartClicked">
+      <h2>Purchase?</h2>
+      <div class="buttons-container">
+        <button>Yes</button>
+        <button>No</button>
+      </div>
+    </div>
     <div class="hymnals">
       <hymnal-entry
         v-for="(hymnal, index) in hymnals"
+        v-show="hymnal.selected || !cartClicked"
         :title="hymnal.title"
         :image="hymnal.image"
         :key="index"
@@ -29,7 +37,7 @@
 <script lang="ts">
 import Vue from "vue";
 import HymnalEntry from "@/components/HymnalEntry.vue"; // @ is an alias to /src
-import {HymnalType} from "@/definitions/types";
+import { HymnalType } from "@/definitions/types";
 
 export default Vue.extend({
   name: "HymnalListView",
@@ -56,8 +64,8 @@ export default Vue.extend({
         },
       ],
       compactView: true,
-      selectedHymnals: null,
-      modalOpen: false,
+      selectedHymnals: [] as HymnalType[],
+      cartClicked: false,
     };
   },
   methods: {
@@ -67,14 +75,8 @@ export default Vue.extend({
     onHymnalClicked($event, index) {
       this.hymnals[index].selected = $event;
     },
-    openConfirmModal() {
-      let selectedHymnals: HymnalType[] = [];
-      this.hymnals.forEach((hymnal) => {
-        if (hymnal.selected) {
-          selectedHymnals.push(hymnal);
-        }
-      });
-      this.selectedHymnals = selectedHymnals;
+    changeCartState() {
+      this.cartClicked = !this.cartClicked;
     },
   },
   computed: {
