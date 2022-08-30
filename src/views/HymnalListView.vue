@@ -1,16 +1,29 @@
 <template>
   <div class="hymnal page-container">
     <div class="title-cart-container">
-    <h1>Hymnals</h1>
-    <button class="cart-button">Cart ({{computeItemsInCart}})</button>
+      <h1>Hymnals</h1>
+      <button class="cart-button" @click="changeCartState">
+        Cart ({{ computeItemsInCart }})
+      </button>
     </div>
-    <button v-if="compactView" class="view-button" @click="changeViewStyle">Enlarge Hymnal Image</button>
-    <button v-else class="view-button" @click="changeViewStyle">Shrink Hymnal Image</button>
+    <button v-if="compactView" class="view-button" @click="changeViewStyle">
+      Enlarge Hymnal Image
+    </button>
+    <button v-else class="view-button" @click="changeViewStyle">
+      Shrink Hymnal Image
+    </button>
+    <div class="purchase-container" v-if="cartClicked">
+      <h2>Purchase?</h2>
+      <div class="buttons-container">
+        <button>Yes</button>
+        <button>No</button>
+      </div>
+    </div>
     <div class="hymnals">
       <hymnal-entry
         v-for="(hymnal, index) in hymnals"
+        v-show="hymnal.selected || !cartClicked"
         :title="hymnal.title"
-        :description="hymnal.description"
         :image="hymnal.image"
         :key="index"
         :compactView="compactView"
@@ -24,6 +37,7 @@
 <script lang="ts">
 import Vue from "vue";
 import HymnalEntry from "@/components/HymnalEntry.vue"; // @ is an alias to /src
+import { HymnalType } from "@/definitions/types";
 
 export default Vue.extend({
   name: "HymnalListView",
@@ -35,46 +49,47 @@ export default Vue.extend({
       hymnals: [
         {
           title: "The Centennial",
-          description: "The old and new in a confounding order",
           image: "centennial.png",
-          selected: false
+          selected: false,
         },
         {
           title: "Old School Hymnal (12th Edition)",
-          description: "The old and the gold",
           image: "osh12.jpg",
-          selected: false
+          selected: false,
         },
         {
           title: "Songs of Zion",
-          description: "With songs ever the bravest leaders shake to lead",
           image: "soz.jpg",
-          selected: false
+          selected: false,
         },
       ],
-      compactView: true 
+      compactView: true,
+      selectedHymnals: [] as HymnalType[],
+      cartClicked: false,
     };
   },
   methods: {
     changeViewStyle() {
-      console.log(this.compactView)
-      this.compactView = !(this.compactView);
+      this.compactView = !this.compactView;
     },
     onHymnalClicked($event, index) {
       this.hymnals[index].selected = $event;
-    }
+    },
+    changeCartState() {
+      this.cartClicked = !this.cartClicked;
+    },
   },
   computed: {
     computeItemsInCart() {
       let currentItems = 0;
-      this.hymnals.forEach(hymnal => {
-        if(hymnal.selected) {
+      this.hymnals.forEach((hymnal) => {
+        if (hymnal.selected) {
           currentItems = currentItems + 1;
         }
-      })
+      });
       return currentItems;
-    }
-  }
+    },
+  },
 });
 </script>
 

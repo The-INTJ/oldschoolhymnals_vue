@@ -1,4 +1,3 @@
-import { auth, firestore } from './firebase';
-import { doc, collection } from 'firebase/firestore';
+import { getDocs, collection } from 'firebase/firestore';
+import { firestore } from './firebase';
 
-// Custom hook to read  auth record and user profile doc

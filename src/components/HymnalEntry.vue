@@ -18,7 +18,6 @@ export default Vue.extend({
   name: "HymnalEntry",
   props: {
     title: String,
-    description: String,
     image: {
       type: String,
       default: "",
