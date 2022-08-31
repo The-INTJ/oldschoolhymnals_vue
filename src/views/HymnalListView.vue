@@ -77,7 +77,7 @@ export default Vue.extend({
     },
     changeCartState() {
       this.cartClicked = !this.cartClicked;
-    },
+    }
   },
   computed: {
     computeItemsInCart() {

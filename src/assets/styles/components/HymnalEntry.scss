@@ -30,6 +30,7 @@
       margin: 0 5px;
       img {
         max-height: 75px;
+        min-height: 75px;
       }
     }
     .description {
@@ -42,12 +43,13 @@
   max-height: 400px;
   max-width: 200px;
   position: relative;
+  margin: auto;
 }
 
 img {
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .description {
