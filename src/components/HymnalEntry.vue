@@ -20,7 +20,7 @@ export default Vue.extend({
     title: String,
     image: {
       type: String,
-      default: "",
+      default: require("@/assets/centennial.png"),
     },
     altText: String,
     bookInCart: Boolean,

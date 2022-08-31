@@ -1,6 +1,7 @@
 <template>
   <div class="page-container account">
     <h1>Account</h1>
+    <button @click="logout">Logout</button>
     <div class="purchased-hymnals">
       <hymnal-entry
         v-for="(hymnal, index) in hymnals"
@@ -17,6 +18,7 @@
 <script lang="ts">
 import Vue from "vue";
 import HymnalEntry from "@/components/HymnalEntry.vue"; // @ is an alias to /src
+import { auth } from "@/lib/firebase";
 
 export default Vue.extend({
   name: "AccountView",
@@ -44,6 +46,11 @@ export default Vue.extend({
       ],
     };
   },
+  methods: {
+    async logout() {
+      auth.signOut();
+    }
+  }
 });
 </script>
 

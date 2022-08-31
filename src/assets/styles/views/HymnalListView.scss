@@ -40,6 +40,10 @@
     }
 }
 
+.view-button {
+    margin-bottom: calc(#{$default-padding} / 2);
+}
+
 .hymnals {
     display: flex;
     flex-direction: row;

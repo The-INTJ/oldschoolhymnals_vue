@@ -14,7 +14,9 @@
 </template>
 
 <script lang="ts">
+import { auth } from "@/lib/firebase";
 import Vue from "vue";
+import store from "@/store";
 
 export default Vue.extend({
   name: "optionsAccordion",
@@ -22,7 +24,7 @@ export default Vue.extend({
   data() {
     return {
       mobile: false,
-      navClicked: false,
+      navClicked: false
     };
   },
   computed: {
@@ -30,8 +32,8 @@ export default Vue.extend({
       return this.navClicked ? "link-visible" : "link-invisible";
     },
     loggedIn() {
-      return this.$store.state.currentUser != null;
-    }
+      return false;
+    },
   },
   methods: {
     setNavClicked() {

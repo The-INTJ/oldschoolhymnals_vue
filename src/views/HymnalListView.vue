@@ -15,8 +15,8 @@
     <div class="purchase-container" v-if="cartClicked">
       <h2>Purchase?</h2>
       <div class="buttons-container">
-        <button>Yes</button>
-        <button>No</button>
+        <button @click="purchase">Yes</button>
+        <button @click="unpurchase">No</button>
       </div>
     </div>
     <div class="hymnals">
@@ -38,6 +38,9 @@
 import Vue from "vue";
 import HymnalEntry from "@/components/HymnalEntry.vue"; // @ is an alias to /src
 import { HymnalType } from "@/definitions/types";
+import { hymnalNames } from "@/definitions/data";
+import { unlockSelectedHymnals, lockSelectedHymnals } from "@/lib/functions";
+import { auth } from "@/lib/firebase";
 
 export default Vue.extend({
   name: "HymnalListView",
@@ -48,18 +51,33 @@ export default Vue.extend({
     return {
       hymnals: [
         {
-          title: "The Centennial",
+          title: hymnalNames[3],
           image: "centennial.png",
           selected: false,
         },
         {
-          title: "Old School Hymnal (12th Edition)",
+          title: hymnalNames[2],
           image: "osh12.jpg",
           selected: false,
         },
         {
-          title: "Songs of Zion",
+          title: hymnalNames[0],
           image: "soz.jpg",
+          selected: false,
+        },
+        {
+          title: hymnalNames[1],
+          image: "osh12.jpg",
+          selected: false,
+        },
+        {
+          title: hymnalNames[4],
+          image: "osh12.jpg",
+          selected: false,
+        },
+        {
+          title: hymnalNames[5],
+          image: "osh12.jpg",
           selected: false,
         },
       ],
@@ -74,10 +92,34 @@ export default Vue.extend({
     },
     onHymnalClicked($event, index) {
       this.hymnals[index].selected = $event;
+      this.updateSelectedHymnals();
     },
     changeCartState() {
       this.cartClicked = !this.cartClicked;
-    }
+    },
+    async purchase() {
+      if (auth.currentUser) {
+        unlockSelectedHymnals(this.selectedHymnals, auth.currentUser);
+      } else {
+        alert("User not logged in")
+      }
+    },
+    async unpurchase() {
+      if (auth.currentUser) {
+        lockSelectedHymnals(this.selectedHymnals, auth.currentUser);
+      } else {
+        alert("User not logged in")
+      }
+    },
+    updateSelectedHymnals() {
+      let selectedHymnals: HymnalType[] = [];
+      this.hymnals.forEach((hymnal) => {
+        if (hymnal.selected) {
+          selectedHymnals.push(hymnal);
+        }
+      });
+      this.selectedHymnals = selectedHymnals;
+    },
   },
   computed: {
     computeItemsInCart() {
