@@ -3,7 +3,7 @@
     <div class="title-cart-container">
       <h1>Hymnals</h1>
       <button class="cart-button" @click="changeCartState">
-        Cart ({{ computeItemsInCart }})
+        Cart ({{ computeItemsInCart.length }})
       </button>
     </div>
     <button v-if="compactView" class="view-button" @click="changeViewStyle">
@@ -18,6 +18,7 @@
         <button @click="purchase">Yes</button>
         <button @click="unpurchase">No</button>
       </div>
+      <div id="paypal-button" ref="paypal"></div>
     </div>
     <div class="hymnals">
       <hymnal-entry
@@ -34,7 +35,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script defer lang="ts">
 import Vue from "vue";
 import HymnalEntry from "@/components/HymnalEntry.vue"; // @ is an alias to /src
 import { HymnalType } from "@/definitions/types";
@@ -86,7 +87,53 @@ export default Vue.extend({
       cartClicked: false,
     };
   },
+  updated: function() { 
+    if(this.$refs.paypal){
+      const script = document.createElement("script");
+      script.src =
+      "https://www.paypal.com/sdk/js?client-id=AfusiI9TfzpfdP1-XN2YP119dZGyO-kQu4IdiZ6HsTp9o4bzPSnM0wKwbVE9_bHz8fSSB7-Sp8JSsXs_";
+      script.addEventListener("load", this.setLoaded);
+      document.body.appendChild(script); 
+    }
+  },
   methods: {
+    setLoaded: function() {
+      let cartDescription = "";
+      const cartLength: number = this.computeItemsInCart.length;
+      // optimized to reduce number of property lookups
+      // TODO: calculate price of cart and pass to amount object
+      for(let i = 0; i < cartLength; i++){
+        if(i === cartLength-1) cartDescription = cartDescription + this.computeItemsInCart[i];
+        else cartDescription = cartDescription = cartDescription + `, ${this.computeItemsInCart[i]}`;
+      }
+      window.paypal.Buttons({
+          createOrder: (data, actions) => {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  description: cartDescription,
+                  amount: {
+                    currency_code: "USD",
+                    value: "10"
+                  }
+                }
+              ]
+            });
+          },
+          onApprove: async (data, actions, resp) => {
+            // https://developer.paypal.com/docs/api/orders/v2/
+            const order = await actions.order.capture();
+            window.location.href = "./paymentstatus/" + "success";
+            // Change DB entry for hymnals in cart to owned or equivalent
+          },
+          onError: err => {
+            console.log(err);
+            window.location.href = "./paymentstatus/" + "failure";
+          }
+        })
+        .render(this.$refs.paypal);
+    },
+
     changeViewStyle() {
       this.compactView = !this.compactView;
     },
@@ -101,14 +148,14 @@ export default Vue.extend({
       if (auth.currentUser) {
         unlockSelectedHymnals(this.selectedHymnals, auth.currentUser);
       } else {
-        alert("User not logged in")
+        alert("User not logged in");
       }
     },
     async unpurchase() {
       if (auth.currentUser) {
         lockSelectedHymnals(this.selectedHymnals, auth.currentUser);
       } else {
-        alert("User not logged in")
+        alert("User not logged in");
       }
     },
     updateSelectedHymnals() {
@@ -123,12 +170,13 @@ export default Vue.extend({
   },
   computed: {
     computeItemsInCart() {
-      let currentItems = 0;
-      this.hymnals.forEach((hymnal) => {
+      let currentItems = this.hymnals.filter((hymnal) => {
         if (hymnal.selected) {
-          currentItems = currentItems + 1;
-        }
+          console.log(hymnal)
+          return hymnal;
+        } 
       });
+      console.log(currentItems)
       return currentItems;
     },
   },
